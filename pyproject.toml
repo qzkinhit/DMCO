@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dmco"
+version = "0.1.0"
+description = "Budget-aware co-optimization of data cleaning and AutoML."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  {name = "DMCO Authors"}
+]
+dependencies = [
+  "numpy>=1.23",
+  "pandas>=1.5",
+  "pyyaml>=6.0",
+  "scikit-learn>=1.2",
+  "scipy>=1.9",
+  "matplotlib>=3.7"
+]
+
+[project.optional-dependencies]
+autosklearn = ["auto-sklearn>=0.15"]
+dev = ["pytest>=7.0", "ruff>=0.5"]
+
+[project.scripts]
+dmco = "dmco.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+exclude = [
+  ".venv",
+  "data",
+  "legacy",
+  "results",
+  "src/dmco.egg-info"
+]

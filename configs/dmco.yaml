@@ -1,0 +1,31 @@
+task: classification
+metric: f1
+random_state: 42
+
+budget:
+  total_seconds: 300
+  n_slices: 10
+  min_automl_seconds: 15
+  early_stop_patience: 4
+
+sampling:
+  clean_batch_fraction: 0.05
+  automl_sample_fraction: 0.30
+  min_automl_samples: 200
+  max_automl_samples: 10000
+  max_gradient_samples: 5000
+  gradient_variance_weight: 0.5
+  loss_mixing_weight: 0.7
+
+scheduler:
+  gamma: 0.9
+  exploration: 1.0
+  stall_patience: 3
+  stall_boost: 0.5
+
+automl:
+  backend: sklearn
+  top_k_families: 3
+  cv_folds: 3
+  per_run_time_limit: 15
+  family_allowlist: null
