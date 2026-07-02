@@ -30,3 +30,4 @@ logs/
 *.joblib
 *.zip
 *.tar.gz
+*.baiduyun.uploading.cfg
