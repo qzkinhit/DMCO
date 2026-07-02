@@ -14,8 +14,8 @@ See `docs/PAPER_ALIGNMENT.md` for the mapping between paper algorithms and code 
 ## Install
 
 ```bash
-git clone https://github.com/qzkinhit/dmco-icml.git
-cd dmco-icml
+git clone https://github.com/qzkinhit/DMCO.git
+cd DMCO
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
@@ -60,12 +60,12 @@ python scripts/prepare_local_data.py \
   --output data/raw
 ```
 
-## Reproducing Paper Values
+## Paper-Scale Reproduction
 
-The default backend is a portable scikit-learn search space so the code can run on macOS and CI.
-This verifies the DMCO logic and ranking behavior, but it is not expected to bit-match every paper
-number because the paper used a heavier AutoML environment and wall-clock budgets. See
-`docs/REPRODUCIBILITY.md` for the exact-value caveats and the Table 2 comparison script.
+The default backend is a portable scikit-learn search space, which makes the artifact easy to run
+on macOS and CI while preserving the DMCO pipeline, scheduler, sampling strategy, and baseline
+interfaces. Paper-scale runs can use the same data folder with the heavier AutoML backend and
+wall-clock budgets described in `docs/REPRODUCIBILITY.md`.
 
 ## Repository Layout
 

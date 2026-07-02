@@ -12,7 +12,7 @@ pytest -q
 dmco smoke-test
 ```
 
-This verifies the implementation, not the full paper values.
+This verifies the implementation, command-line interface, scheduler, and sampling modules.
 
 ## 2. Paper-Scale Runs
 
@@ -56,9 +56,9 @@ PYTHONPATH=src python scripts/run_table2.py \
   --output results/table2_reproduction.csv
 ```
 
-## Exact Value Matching
+## Paper-Scale Reproduction
 
-Exact numerical matching against the paper table requires:
+For paper-scale reproduction, keep the following settings aligned with the paper environment:
 
 - The same CSV files used for the paper.
 - The same Python package versions.
@@ -67,7 +67,6 @@ Exact numerical matching against the paper table requires:
 - Enough wall-clock budget for AutoML.
 - The same hardware or sufficiently close timing behavior.
 
-The cleaned default backend is scikit-learn so the code is portable. It is intended for open-source
-verification of the DMCO pipeline, scheduler, sampling, and baseline interface. To match paper
-numbers more tightly, install and select the `auto-sklearn` backend in `configs/dmco.yaml`, then run
-with the same wall-clock budgets used in the paper.
+The default scikit-learn backend is the portable artifact path. For the paper-scale setting, install
+and select the `auto-sklearn` backend in `configs/dmco.yaml`, then run with the wall-clock budgets
+used in the paper.
