@@ -16,11 +16,11 @@ This verifies the implementation, not the full paper values.
 
 ## 2. Paper-Scale Runs
 
-First extract local data:
+The repository includes `data/raw/`. If your copy does not include it, extract the local archive:
 
 ```bash
 python scripts/prepare_local_data.py \
-  --zip "/Users/qianzekai/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_nvqr9du1hgd422_c207/msg/file/2026-07/dmco_code.zip" \
+  --zip /path/to/dmco_code.zip \
   --output data/raw
 ```
 
@@ -58,7 +58,7 @@ PYTHONPATH=src python scripts/run_table2.py \
 
 ## Exact Value Matching
 
-Exact numerical matching requires:
+Exact numerical matching against the paper table requires:
 
 - The same CSV files used for the paper.
 - The same Python package versions.
@@ -67,4 +67,7 @@ Exact numerical matching requires:
 - Enough wall-clock budget for AutoML.
 - The same hardware or sufficiently close timing behavior.
 
-The cleaned default backend is scikit-learn so the code is portable. To match paper numbers more tightly, install and select the `auto-sklearn` backend in `configs/dmco.yaml`.
+The cleaned default backend is scikit-learn so the code is portable. It is intended for open-source
+verification of the DMCO pipeline, scheduler, sampling, and baseline interface. To match paper
+numbers more tightly, install and select the `auto-sklearn` backend in `configs/dmco.yaml`, then run
+with the same wall-clock budgets used in the paper.

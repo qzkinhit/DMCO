@@ -14,7 +14,8 @@ See `docs/PAPER_ALIGNMENT.md` for the mapping between paper algorithms and code 
 ## Install
 
 ```bash
-cd /Users/qianzekai/PyCharmProjects/dmco-icml
+git clone https://github.com/qzkinhit/dmco-icml.git
+cd dmco-icml
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev]"
@@ -47,13 +48,24 @@ dmco run \
 
 ## Data
 
-The private repository may include `data/raw/` for internal reproducibility. If the data are not present after a fresh clone, prepare them from the original zip:
+This artifact repository includes the aligned CSV files used by the reproducibility scripts under
+`data/raw/`. The largest portion is `data/raw/inject_all/`, which contains the injected corruption
+grid used for paper-scale experiments.
+
+If you are working from a copy without `data/raw/`, prepare the same folder from a local archive:
 
 ```bash
 python scripts/prepare_local_data.py \
-  --zip "/Users/qianzekai/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_nvqr9du1hgd422_c207/msg/file/2026-07/dmco_code.zip" \
+  --zip /path/to/dmco_code.zip \
   --output data/raw
 ```
+
+## Reproducing Paper Values
+
+The default backend is a portable scikit-learn search space so the code can run on macOS and CI.
+This verifies the DMCO logic and ranking behavior, but it is not expected to bit-match every paper
+number because the paper used a heavier AutoML environment and wall-clock budgets. See
+`docs/REPRODUCIBILITY.md` for the exact-value caveats and the Table 2 comparison script.
 
 ## Repository Layout
 
@@ -62,15 +74,20 @@ python scripts/prepare_local_data.py \
 - `scripts/`: local utility scripts.
 - `tests/`: unit tests for scheduler and sampling.
 - `legacy/`: original scripts kept for reproducibility audit, not used by the package.
-- `data/`, `results/`: local-only folders ignored by Git.
+- `data/raw/`: tracked paper artifact CSV files.
+- `results/`: tracked reference CSV summaries plus local generated outputs.
 
-## Notes For Private GitHub Upload
+## Release Hygiene
 
 Before pushing, run:
 
 ```bash
-pytest
+ruff check .
+pytest -q
+dmco smoke-test
 git status --short
 ```
 
-Do not commit `data/`, `results/`, `.idea/`, or virtual environments. They are ignored by default.
+Do not commit `.idea/`, virtual environments, caches, temporary logs, or ad hoc experiment dumps.
+The curated CSV artifacts under `data/raw/` and the reference CSV summaries under `results/` are
+intentionally tracked.

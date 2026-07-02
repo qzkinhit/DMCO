@@ -61,4 +61,6 @@ The package focuses on the reusable DMCO algorithm. The historical baseline scri
 
 ## GitHub Hygiene
 
-Large CSVs, local results, IDE metadata, caches, and virtual environments are ignored by `.gitignore`. This keeps the repository suitable for a private GitHub remote now and easier to open-source later.
+The curated CSV artifact under `data/raw/` is intentionally tracked so a fresh clone can run the
+included reproducibility scripts. IDE metadata, caches, virtual environments, temporary logs, and
+non-curated local outputs remain ignored by `.gitignore`.
